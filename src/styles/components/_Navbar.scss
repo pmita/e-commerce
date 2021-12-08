@@ -1,0 +1,47 @@
+nav{
+    min-height: 10vh;
+    width: 100%;
+    padding: 0 5rem;
+    background: $white;
+    @include flex(row, space-around, center);
+}
+
+.navbar-logo,
+.navbar-links,
+.navbar-actions{
+    flex: 1;
+}
+
+.navbar-links{
+    @include flex(row, space-around, center);
+    li a{
+        color: $black;
+        transition: $transition;
+        &:hover,
+        &.active{
+            color: $green;
+        }
+    }
+}
+
+.navbar-actions{
+    @include flex(row, flex-end, center);
+    li{
+        padding-left: 1rem;
+    }
+}
+
+.navbar-cart{
+    position: relative;
+    span{
+        position: absolute;
+        top: -100%;
+        left: 60%;
+        background: $green;
+        color: $white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        text-align: center;
+    }
+}

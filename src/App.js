@@ -9,12 +9,14 @@ import About from './pages/about/About';
 import Products from './pages/products/Products';
 import Profile from './pages/profile/Profile';
 import Testimonials from './pages/testimonials/Testimonials';
+// COMPONENTS
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello from App.js component</h1>
       <Router>
+        <Navbar />
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/cart' element={<Cart />} />

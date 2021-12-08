@@ -6,6 +6,9 @@
     background: green;
 }
 
+// Components
+@import './components/Navbar';
+
 // Pages
 @import './pages/About';
 @import './pages/Cart';
