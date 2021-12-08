@@ -1,0 +1,19 @@
+@import './base/variables';
+@import './abstract/global';
+@import './mixins/mixins';
+
+.App{
+    background: green;
+}
+
+// Components
+@import './components/Navbar';
+
+// Pages
+@import './pages/About';
+@import './pages/Cart';
+@import './pages/Contact';
+@import './pages/Home';
+@import './pages/Products';
+@import './pages/Profile';
+@import './pages/Testimonials';
