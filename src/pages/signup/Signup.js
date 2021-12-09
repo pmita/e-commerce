@@ -1,14 +1,23 @@
 import React, { useState } from 'react'
+// HOOKS
+import { useSignup } from '../../hooks/useSignup'
 
 const Signup = () => {
     // STATE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [displayName, setDisplayName] = useState('')
+    const { signup, isPending, error } = useSignup()
+
+    // EVENTS
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        signup(email, password, displayName)
+    }
 
     return(
-        <div className='login-page'>
-            <form>
+        <div className='signup-page'>
+            <form onSubmit={handleSubmit}>
                 <label>
                     <span>Email: </span>
                     <input
@@ -36,7 +45,9 @@ const Signup = () => {
                         value={displayName}
                     />
                 </label>
-                <button>Sign up</button>
+                {!isPending && <button className='btn'>Sign Up</button>}
+                {isPending && <button className='btn' required>Loading...</button>}
+                {error && <p className='error'>{error}</p>}
             </form>
         </div>
     );

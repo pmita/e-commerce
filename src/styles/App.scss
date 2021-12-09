@@ -3,7 +3,7 @@
 @import './mixins/mixins';
 
 .App{
-    background: green;
+    background: $white;
 }
 
 // Components
@@ -17,3 +17,4 @@
 @import './pages/Products';
 @import './pages/Profile';
 @import './pages/Testimonials';
+@import './pages/Signup';
