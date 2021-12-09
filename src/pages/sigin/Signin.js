@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
+import { useSignin } from '../../hooks/useSignin' //HOOKS
+import { useNavigate } from 'react-router' // ROUTER
 
-const Login = () => {
+const Signin = () => {
     // STATE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const { signin, isPending, error } = useSignin()
+    const navigate = useNavigate()
+
+    // EVENTS
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        signin(email, password)
+        navigate('/')
+    }
 
     return(
-        <div className='login-page'>
-            <form>
+        <div className='signin-page'>
+            <form onSubmit={handleSubmit}>
                 <label>
                     <span>Email: </span>
                     <input
@@ -26,10 +37,12 @@ const Login = () => {
                         value={password}
                     />
                 </label>
-                <button>Login</button>
+                {!isPending && <button className='btn'>Sign in</button>}
+                {isPending && <button className='btn' disabled>Loading...</button>}
+                {error && <p className='error'>{error}</p>}
             </form>
         </div>
     );
 }
 
-export default Login;
+export default Signin;

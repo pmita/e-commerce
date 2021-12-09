@@ -40,7 +40,7 @@ export const useSignup = () => {
             
             dispatch({ type : 'SIGNUP', poayload : response.user })
             
-            await console.table(response)
+            await console.log(response)
 
             if(!isCancelled){
                 setIsPending(false)
