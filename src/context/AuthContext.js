@@ -14,6 +14,8 @@ const authReducer = (state, action) => {
         case 'SIGNIN':
             return { ...state, user : action.payload };
         case 'SIGNUP':
+            return { ...state, user : action.payload };
+        case 'SIGNOUT':
             return { ...state, user : null };
         case 'AUTH_IS_READY':
             return { user : action.payload, authIsReady : true }
@@ -34,7 +36,8 @@ export const AuthContextProvider = ({ children }) => {
         })
 
         return () => unsubscribe()
-    })
+    }, [])
+
     return(
         <AuthContext.Provider value={{ ...state, dispatch }}>
             {children}

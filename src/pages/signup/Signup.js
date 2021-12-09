@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSignup } from '../../hooks/useSignup' // HOOKS
-import { useNavigate } from 'react-router'
 
 const Signup = () => {
     // STATE
@@ -8,13 +7,11 @@ const Signup = () => {
     const [password, setPassword] = useState('')
     const [displayName, setDisplayName] = useState('')
     const { signup, isPending, error } = useSignup()
-    const navigate = useNavigate()
 
     // EVENTS
     const handleSubmit = (e) => {
         e.preventDefault()
         signup(email, password, displayName)
-        navigate('/')
     }
 
     return(

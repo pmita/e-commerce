@@ -15,35 +15,6 @@ const Navbar = () => {
     const { signout, isPending } = useSignout()
     const navigate = useNavigate()
 
-    // FUNCTIONS
-    const userIsSigned = () => {
-        return(
-            <>
-                <li>
-                    <Link to='/user'>
-                        <img 
-                            src={acountIcon} 
-                            alt='user profile icon' 
-                    />
-                    </Link>
-                </li>
-                    <li>
-                        {!isPending && <button className='btn' onClick={signout}>Sign Out</button>}
-                        {isPending && <button className='btn' disabled>Loading...</button>}
-                    </li>
-            </>
-        )
-    }
-
-    const userIsNotSigned = () => {
-        return(
-            <li>
-                <button className='btn' onClick={() => navigate('/signin')}>
-                    Sign in  
-                </button>
-            </li>
-        )
-    }
     return(
         <nav>
             <span className='navbar-burger' >
@@ -91,7 +62,30 @@ const Navbar = () => {
             </ul>
                 
             <ul className='navbar-actions'>
-                {user ? userIsSigned() : userIsNotSigned()}
+                {user && (
+                    <>
+                        <li>
+                            <Link to='/profile'>
+                                <img 
+                                    src={acountIcon} 
+                                    alt='user profile icon' 
+                            />
+                            </Link>
+                        </li>
+                            <li>
+                                {!isPending && <button className='btn' onClick={() => signout()}>Sign Out</button>}
+                                {isPending && <button className='btn' disabled>Loading...</button>}
+                            </li>
+                    </>
+                )}
+
+                {!user && (
+                    <li>
+                        <button className='btn' onClick={() => navigate('/')}>
+                            Sign in  
+                        </button>
+                    </li>
+                )}
                 <li>
                     <Link to='/cart' className='navbar-cart'>
                         <img 
