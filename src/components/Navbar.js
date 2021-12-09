@@ -1,15 +1,49 @@
 import React, { useState } from 'react'
-// REACT ROUTER
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom' // REACT ROUTER
 // ASSETS
 import logoImg from '../assets/images/logo.png'
 import acountIcon from '../assets/icons/acount.svg'
 import cartIcon from '../assets/icons/cart.svg'
 import burgerIcon from '../assets/icons/burger.svg'
+import { useAuthContext } from '../hooks/useAuthContext' // CONTEXT
+import { useSignout } from '../hooks/useSignout' // HOOKS
 
 const Navbar = () => {
     // STATE
     const [isActive, setIsActive] = useState(false)
+    const { user } = useAuthContext()
+    const { signout, isPending } = useSignout()
+    const navigate = useNavigate()
+
+    // FUNCTIONS
+    const userIsSigned = () => {
+        return(
+            <>
+                <li>
+                    <Link to='/user'>
+                        <img 
+                            src={acountIcon} 
+                            alt='user profile icon' 
+                    />
+                    </Link>
+                </li>
+                    <li>
+                        {!isPending && <button className='btn' onClick={signout}>Sign Out</button>}
+                        {isPending && <button className='btn' disabled>Loading...</button>}
+                    </li>
+            </>
+        )
+    }
+
+    const userIsNotSigned = () => {
+        return(
+            <li>
+                <button className='btn' onClick={() => navigate('/signin')}>
+                    Sign in  
+                </button>
+            </li>
+        )
+    }
     return(
         <nav>
             <span className='navbar-burger' >
@@ -57,14 +91,7 @@ const Navbar = () => {
             </ul>
                 
             <ul className='navbar-actions'>
-                <li>
-                    <Link to='/user'>
-                        <img 
-                            src={acountIcon} 
-                            alt='user profile icon' 
-                        />
-                    </Link>
-                </li>
+                {user ? userIsSigned() : userIsNotSigned()}
                 <li>
                     <Link to='/cart' className='navbar-cart'>
                         <img 
