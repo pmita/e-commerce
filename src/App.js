@@ -1,6 +1,6 @@
 import React from 'react'
 // REACT ROUTER
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-router-dom'
 // PAGES
 import Home from './pages/home/Home';
 import Cart from './pages/cart/Cart';
@@ -13,8 +13,22 @@ import Signup from './pages/signup/Signup';
 // COMPONENTS
 import Navbar from './components/Navbar';
 import Signin from './pages/sigin/Signin';
+// HOOKS
+import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
+  // STATE
+  const { user } = useAuthContext()
+
+  // FUNCTIONS
+  const PrivateRouteToHome = () => {
+    return user ? <Navigate to='/' /> : <Outlet />;
+  }
+
+  const PrivateRouteToLogin = () => {
+    return user ? <Outlet /> : <Navigate to='/signin' />;
+  }
+
   return (
     <div className="App">
       <Router>
@@ -25,10 +39,16 @@ function App() {
           <Route path='/contact-us' element={<Contact />} />
           <Route path='/about' element={<About />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<PrivateRouteToLogin />}>
+            <Route path='/profile' element={<Profile />} />
+          </Route>
           <Route path='/testimonials' element={<Testimonials />} />
-          <Route path='/signin' element={<Signin />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/signin' element={<PrivateRouteToHome />}>
+            <Route path='/signin' element={<Signin />} />
+          </Route>
+          <Route path='/signup' element={<PrivateRouteToHome />}>
+            <Route path='/signup' element={<Signup />} />
+          </Route>
         </Routes>
       </Router>
     </div>
