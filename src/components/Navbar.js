@@ -81,7 +81,7 @@ const Navbar = () => {
 
                 {!user && (
                     <li>
-                        <button className='btn' onClick={() => navigate('/')}>
+                        <button className='btn' onClick={() => navigate('/signin')}>
                             Sign in  
                         </button>
                     </li>
