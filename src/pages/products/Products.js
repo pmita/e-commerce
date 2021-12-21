@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { projectFirestore } from '../../firebase/config'; // FIREBASE
-import Product from './Product'; // COMPONENTS
-import { useCollection } from '../../hooks/useCollection';
+import React from 'react'
+import { useCollection } from '../../hooks/useCollection'; // HOOKS
+import ProductCard from './ProductCard'; // COMPONENTS
 
 const Products = () => {
     //STATE
@@ -15,7 +14,9 @@ const Products = () => {
             {isPending && <p>Items Loading...</p>}
             {error && <p className='error'>{error}</p>}
             <div className='products'>
-                {products && products.map((product) => <Product product={product} />)}
+                {products && products.map((product) => {
+                    return <ProductCard key={product.id} product={product} />
+                })}
             </div>
         </section>
     );

@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'; // ROUTER
 
-const Product = ({ product }) => {
+const ProductCard = ({ product }) => {
     return(
         <div className='product-card'>
             <img src={product.product_image_path} alt='product' />
@@ -8,8 +9,13 @@ const Product = ({ product }) => {
                 <h4>{product.title}</h4>
                 <h3>{product.price}</h3>
             </div>
+            <button className='btn'>
+                <Link to={`/products/${product.id}`}>
+                    Ckeck Item
+                </Link>
+            </button>
         </div>
     );
 }
 
-export default Product;
+export default ProductCard;

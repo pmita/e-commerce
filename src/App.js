@@ -7,6 +7,7 @@ import Cart from './pages/cart/Cart';
 import Contact from './pages/contact/Contact';
 import About from './pages/about/About';
 import Products from './pages/products/Products';
+import Product from './pages/product/Product';
 import Profile from './pages/profile/Profile';
 import Testimonials from './pages/testimonials/Testimonials';
 import Signup from './pages/signup/Signup';
@@ -39,6 +40,7 @@ function App() {
           <Route path='/contact-us' element={<Contact />} />
           <Route path='/about' element={<About />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/products/:id' exact element={<Product />} />
           <Route path='/profile' element={<PrivateRouteToLogin />}>
             <Route path='/profile' element={<Profile />} />
           </Route>
