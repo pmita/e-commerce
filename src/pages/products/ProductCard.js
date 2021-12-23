@@ -1,14 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'; // ROUTER
 import { useAuthContext } from '../../hooks/useAuthContext'; // CONTEXT
+import { useFirestore } from '../../hooks/useFirestore';
 
 const ProductCard = ({ product }) => {
     // STATE
-    const { dispatch, cart } = useAuthContext();
+    const { user, dispatch, cart } = useAuthContext()
+    const { updateDocument } = useFirestore('users')
 
     // EVENTS
-    const handleAddCart = () => {
+    const handleAddCart = async () => {
         dispatch({ type : 'ADD_ITEM', payload : product })
+
+        await updateDocument( user.uid, { cart : [ ...cart, { product, quantity : 1 }] })
     }
 
     // FUNCTIONS

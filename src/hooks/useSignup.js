@@ -35,7 +35,8 @@ export const useSignup = () => {
             
             await projectFirestore.collection('users').doc(response.user.uid).set({
                 online: true,
-                displayName : displayName
+                displayName : displayName,
+                cart : []
             })
             
             dispatch({ type : 'SIGNUP', payload : response.user })
