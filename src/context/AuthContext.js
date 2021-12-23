@@ -6,10 +6,12 @@ export const AuthContext = createContext();
 // REDUCER STATE & FUNCTION
 const initialState = {
     user : null,
-    authIsReady : false
+    authIsReady : false,
+    cart : []
 }
 
 const authReducer = (state, action) => {
+    const { cart } = state
     switch(action.type){
         case 'SIGNIN':
             return { ...state, user : action.payload };
@@ -18,7 +20,15 @@ const authReducer = (state, action) => {
         case 'SIGNOUT':
             return { ...state, user : null };
         case 'AUTH_IS_READY':
-            return { user : action.payload, authIsReady : true }
+            return { ...state, user : action.payload, authIsReady : true }
+        case 'ADD_ITEM':
+            if(!cart.find((item) => item.id === action.payload.id)){
+                cart.push({
+                    ...action.payload,
+                    quantity : 1
+                })
+            }
+            return { ...state, cart : [...cart] }
         default:
             return state;
     }

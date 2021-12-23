@@ -59,10 +59,13 @@
     font-size: 1em;
     border: 1px solid $green;
     transition: $transition;
-  }
-  .btn:hover {
-    color: $green;
-    background-color: $white;
+    &:hover{
+      color: $green;
+      background-color: $white;
+    }
+    &:disabled{
+      cursor: not-allowed;
+    }
   }
 
   /* forms */
