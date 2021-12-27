@@ -1,0 +1,24 @@
+.cart-page{
+    width: 100%;
+    min-height: 90vh;
+    padding-top: 5rem;
+    @include flex(column, flex-start, center);
+    a{
+        padding: 5rem 0;
+        text-decoration: underline;
+        color: $green;
+    }
+}
+
+.cart-items{
+    width: 100%;
+    padding: 0 10rem;
+}
+
+@media only screen and (max-width: 900px){
+    .cart-items{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-auto-rows: 400px;
+    }
+}

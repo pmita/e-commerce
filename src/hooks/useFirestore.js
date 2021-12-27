@@ -7,6 +7,8 @@ export const useFirestore = (collection) => {
     const [isPending, setIsPending] = useState(false)
     const [isCancelled, setIsCancelled] = useState(false)
 
+
+
     const updateDocument = async (id, updates) => {
         // reset state pre-fetching
         setIsPending(true)

@@ -28,7 +28,10 @@ const authReducer = (state, action) => {
                     quantity : 1
                 })
             }
-            return { ...state, cart : [...cart] }
+            return { ...state, cart : [...cart] };
+        case 'REMOVE_ITEM':
+            const newCart = cart.filter((item) => item.id !== action.payload.id)
+            return { ...state, cart : [ ...newCart ]};
         default:
             return state;
     }

@@ -1,0 +1,24 @@
+.cart-item{
+    width: 100%;
+    @include flex(row, space-between, center);
+}
+
+@media only screen and (max-width: 900px){
+    .cart-item{
+        @include flex(column, space-between, center);
+    }
+
+    .cart-item-price,
+    .cart-item-details,
+    .cart-item-quantity,
+    .cart-item-total{
+        width: 100%;
+        @include flex(row, space-evenly, center);
+    }
+
+    .cart-item-price,
+    .cart-item-total{
+        width: 100%;
+        @include flex(row, flex-end, center);
+    }
+}
