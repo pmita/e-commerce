@@ -1,17 +1,12 @@
-import React, {useState} from 'react'
-// HOOKS
-import { useAuthContext } from '../../hooks/useAuthContext'
+import React from 'react'
+import { useAuthContext } from '../../hooks/useAuthContext' // HOOKS
+import CartQuantity from './CartQuantity' // COMPONENTS
 
 const CartItem = ({ item }) => {
     // STATE
-    const [counter, setCounter] = useState(1)
     const { dispatch } = useAuthContext()
 
     // EVENTS
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
-
     const handleRemove = () => {
         dispatch({ type : 'REMOVE_ITEM', payload : item })
     }
@@ -26,19 +21,13 @@ const CartItem = ({ item }) => {
             <img src={item.product_image_path} alt='product with grey background' />
             <div className='cart-item-details'>
                 <h4>{item.title}</h4>
-                <button onClick={handleRemove}>
+                <h6 onClick={handleRemove}>
                     Remove
-                </button>
+                </h6>
             </div>
             <div className='cart-item-quantity'>
                 <h4>Quantity</h4>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type='number'
-                        value={counter}
-                        onChange={(e) => setCounter(e.target.value)}
-                    />
-                </form>
+                <CartQuantity item={item} />
             </div>
             <div className='cart-item-price'>
                 <h4>Price</h4>

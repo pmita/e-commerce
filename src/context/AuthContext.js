@@ -32,6 +32,12 @@ const authReducer = (state, action) => {
         case 'REMOVE_ITEM':
             const newCart = cart.filter((item) => item.id !== action.payload.id)
             return { ...state, cart : [ ...newCart ]};
+        case 'INCREASE_ITEM_QUANTITY':
+            cart[cart.findIndex((item) => item.id === action.payload.id)].quantity++
+            return { ...state, cart : [...cart] };
+        case 'DECREASE_ITEM_QUANTITY':
+            cart[cart.findIndex((item) => item.id === action.payload.id)].quantity--
+            return { ...state, cart : [...cart] };
         default:
             return state;
     }

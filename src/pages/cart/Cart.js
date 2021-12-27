@@ -18,7 +18,12 @@ const Cart = () => {
             </Link>
             <div className='cart-items'>
                 {cart && cart.map((item) => {
-                    return <CartItem item={item} />
+                    return (
+                        <CartItem 
+                            item={item} 
+                            key={item.id}
+                        />
+                    );
                 })}
             </div>
         </section>
