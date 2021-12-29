@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom' // ROUTER
 import { useAuthContext } from '../../hooks/useAuthContext'; 
 // COMPONENTS
 import CartItem from './CartItem';
-
+import CartTotal from './CartTotal';
 
 const Cart = () => {
     // STATE
@@ -26,6 +26,7 @@ const Cart = () => {
                     );
                 })}
             </div>
+            {cart && <CartTotal />}
         </section>
     );
 }

@@ -17,9 +17,10 @@
 
 @media only screen and (max-width: 900px){
     .cart-items{
+        padding: 0 5rem;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-        grid-auto-rows: minmax(230px, 350px);
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-auto-rows: 400px;
         gap: 2rem;
     }
 }

@@ -7,7 +7,8 @@ export const AuthContext = createContext();
 const initialState = {
     user : null,
     authIsReady : false,
-    cart : []
+    cart : [],
+    total : 0
 }
 
 const authReducer = (state, action) => {
@@ -21,6 +22,11 @@ const authReducer = (state, action) => {
             return { ...state, user : null };
         case 'AUTH_IS_READY':
             return { ...state, user : action.payload, authIsReady : true }
+        case 'CALCULATE_TOTAL':
+            const newTotal = cart.reduce((acc, curr) => {
+                return acc + (curr.price * curr.quantity);
+            }, 0)
+            return { ...state, total : newTotal };
         case 'ADD_ITEM':
             if(!cart.find((item) => item.id === action.payload.id)){
                 cart.push({

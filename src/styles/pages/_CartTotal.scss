@@ -1,0 +1,10 @@
+.cart-items-total{
+    width: 80%;
+    @include flex(row, flex-end, center);
+    form{
+        @include flex(row, flex-end, center);
+        h4{
+            padding: 0 2rem;
+        }
+    }
+}
