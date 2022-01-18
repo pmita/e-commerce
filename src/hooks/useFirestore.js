@@ -43,6 +43,25 @@ export const useFirestore = (collection) => {
         }
     }
 
+    const updateDocumentInSubcollection = async (id, productId, updates) => {
+        // reset state pre-fetching
+        setIsPending(true)
+        setError(null)
+
+        try{
+            if(!isCancelled){
+                await projectFirestore.collection('users').doc(id)
+                    .collection('cart').doc(productId).update(updates)
+            }
+        } catch(err){
+            if(!isCancelled){
+                setError(err.message)
+                setIsPending(false)
+            }
+        }
+
+    }
+
     const updateDocument = async (id, updates) => {
         // reset state pre-fetching
         setIsPending(true)
@@ -60,9 +79,34 @@ export const useFirestore = (collection) => {
         }
     }
 
+    const deleteDocumentInSubcollection = async (id, productId) => {
+        // reset state pre-fetching
+        setIsPending(true)
+        setError(null)
+
+        try{
+            if(!isCancelled){
+                await projectFirestore.collection('users').doc(id)
+                    .collection('cart').doc(productId).delete()
+            }
+        } catch(err){
+            if(!isCancelled){
+                setError(err.message)
+                setIsPending(false)
+            }
+        }
+    }
+
     useEffect(() => {
         return () => setIsCancelled(true);
     }, [])
 
-    return { addDocument, addDocumentInSubcollection, updateDocument, isPending, error };
+    return { 
+        addDocument, 
+        addDocumentInSubcollection, 
+        updateDocument, 
+        updateDocumentInSubcollection, 
+        deleteDocumentInSubcollection,
+        isPending, 
+        error };
 }

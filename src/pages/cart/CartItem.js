@@ -1,12 +1,13 @@
 import React from 'react'
-import { useAuthContext } from '../../hooks/useAuthContext' // HOOKS
+// HOOKS
+import { useAuthContext } from '../../hooks/useAuthContext' 
 import { useFirestore } from '../../hooks/useFirestore'
 import CartQuantity from './CartQuantity' // COMPONENTS
 
 const CartItem = ({ item }) => {
     // STATE
     const { dispatch, user, cart } = useAuthContext()
-    const { updateDocument } = useFirestore('cart')
+    const { updateDocument, deleteDocumentInSubcollection } = useFirestore('cart')
 
     // EVENTS
     const handleRemove = async () => {
@@ -14,6 +15,10 @@ const CartItem = ({ item }) => {
         await updateDocument(user.displayName, { 
             cart : [ ...cart ]
         })
+    }
+
+    const handleRemoveV2 = async () => {
+        await deleteDocumentInSubcollection(user.uid, item.id)
     }
 
     // FUNCTIONS
@@ -28,6 +33,9 @@ const CartItem = ({ item }) => {
                 <h4>{item.title}</h4>
                 <h6 onClick={handleRemove}>
                     Remove
+                </h6>
+                <h6 onClick={handleRemoveV2}>
+                    RemoveV2
                 </h6>
             </div>
             <div className='cart-item-quantity'>

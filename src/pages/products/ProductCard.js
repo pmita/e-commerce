@@ -18,7 +18,8 @@ const ProductCard = ({ product }) => {
     }
 
     const handleAddCartV2 = async () => {
-        await addDocumentInSubcollection(user.uid, product.id, product);
+        await addDocumentInSubcollection(user.uid, product.id, { ...product, quantity : 1 });
+        dispatch({ type : 'ADD_ITEM', payload : product })
     }
 
     // FUNCTIONS
