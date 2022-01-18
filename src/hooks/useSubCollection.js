@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState} from 'react'
 import { projectFirestore } from '../firebase/config'
 
-export const useCollection = (collection) => {
+export const useSubCollection = (collection, docId , subCollection) => {
     // STATE
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
@@ -13,12 +13,12 @@ export const useCollection = (collection) => {
         setIsPending(true)
         setError(null)
 
-        const unsubscribe = projectFirestore.collection(collection)
-            .onSnapshot((snapshot) => {
+        const unsubscribe = projectFirestore.collection(collection).doc(docId )
+            .collection(subCollection).onSnapshot((snapshot) => {
                 if(snapshot.empty){
-                    setError('No documents to load')
+                    setError('No items to load')
                     setIsPending(false)
-                } else {
+                } else{
                     let results = [];
                     snapshot.forEach((doc) => {
                         results.push({ ...doc.data(), id : doc.id })
@@ -28,11 +28,11 @@ export const useCollection = (collection) => {
                 }
             }, (err) => {
                 setError(err.message)
-                console.log('Could not fetch data on this occasion')
+                console.log('Could not fetch data from subcollection on this occasion')
             })
 
             return () => unsubscribe()
-    }, [collection])
+    }, [collection, docId, subCollection])
 
     return { data, error, isPending };
 }

@@ -1,14 +1,19 @@
 import React from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext' // HOOKS
+import { useFirestore } from '../../hooks/useFirestore'
 import CartQuantity from './CartQuantity' // COMPONENTS
 
 const CartItem = ({ item }) => {
     // STATE
-    const { dispatch } = useAuthContext()
+    const { dispatch, user, cart } = useAuthContext()
+    const { updateDocument } = useFirestore('cart')
 
     // EVENTS
-    const handleRemove = () => {
+    const handleRemove = async () => {
         dispatch({ type : 'REMOVE_ITEM', payload : item })
+        await updateDocument(user.displayName, { 
+            cart : [ ...cart ]
+        })
     }
 
     // FUNCTIONS

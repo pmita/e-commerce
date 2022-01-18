@@ -8,6 +8,40 @@ export const useFirestore = (collection) => {
     const [isCancelled, setIsCancelled] = useState(false)
 
 
+    const addDocument = async (doc) => {
+        // reset state pre-fetching
+        setError(null)
+        setIsPending(true)
+
+        try{
+            if(!isCancelled){
+                await projectFirestore.collection(collection).add({ ...doc })
+            }
+        } catch(err){
+            if(!isCancelled){
+                setError(err.message)
+                setIsPending(false)
+            }
+        }
+    }
+
+    const addDocumentInSubcollection = async (userId, productId, doc) => {
+        // reset state pre-fetching
+        setError(null)
+        setIsPending(true)
+
+        try{
+            if(!isCancelled){
+                await projectFirestore.collection('users').doc(userId)
+                      .collection('cart').doc(productId).set({ ...doc });
+            }
+        } catch(err){
+            if(!isCancelled){
+                setError(err.message)
+                setIsPending(false)
+            }
+        }
+    }
 
     const updateDocument = async (id, updates) => {
         // reset state pre-fetching
@@ -30,5 +64,5 @@ export const useFirestore = (collection) => {
         return () => setIsCancelled(true);
     }, [])
 
-    return { updateDocument, isPending, error };
+    return { addDocument, addDocumentInSubcollection, updateDocument, isPending, error };
 }

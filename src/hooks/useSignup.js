@@ -41,6 +41,10 @@ export const useSignup = () => {
             
             dispatch({ type : 'SIGNUP', payload : response.user })
 
+            await projectFirestore.collection('cart').doc(response.user.displayName).set({
+                cart : {}
+            })
+
             if(!isCancelled){
                 setIsPending(false)
                 setError(null)
