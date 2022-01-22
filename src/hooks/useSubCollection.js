@@ -18,6 +18,7 @@ export const useSubCollection = (collection, docId , subCollection) => {
                 if(snapshot.empty){
                     setError('No items to load')
                     setIsPending(false)
+                    setData(null);
                 } else{
                     let results = [];
                     snapshot.forEach((doc) => {

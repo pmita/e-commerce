@@ -6,19 +6,16 @@ import { useFirestore } from '../../hooks/useFirestore';
 const ProductCard = ({ product }) => {
     // STATE
     const { dispatch, user, cart } = useAuthContext()
-    const { updateDocument, addDocumentInSubcollection } = useFirestore('cart')
+    const { addDocumentInSubcollection } = useFirestore('cart')
 
 
     // EVENTS
     const handleAddCart = async () => {
-        await updateDocument(user.displayName, { 
-            cart : [ ...cart, product ]
-        })
-        dispatch({ type : 'ADD_ITEM', payload : product })
-    }
-
-    const handleAddCartV2 = async () => {
-        await addDocumentInSubcollection(user.uid, product.id, { ...product, quantity : 1 });
+        await addDocumentInSubcollection(
+            user.uid, 
+            product.id, 
+            { ...product, quantity : 1 }
+        );
         dispatch({ type : 'ADD_ITEM', payload : product })
     }
 
@@ -26,33 +23,22 @@ const ProductCard = ({ product }) => {
     const disableAddCart = () => {
         if(cart.find(item => item.id === product.id)) {
             return(
-                <>
-                    <button 
-                        className='btn'
-                        onClick={handleAddCart}
-                        disabled
-                    >
-                        Already in Cart
-                    </button>
-                
-                </>
+                <button 
+                    className='btn'
+                    onClick={handleAddCart}
+                    disabled
+                >
+                    Already in Cart
+                </button>
             );
         } else {
             return(
-                <>
-                    <button 
-                        className='btn'
-                        onClick={handleAddCart}
-                    >
-                        Add to cart
-                    </button>
-                    <button 
-                        className='btn'
-                        onClick={handleAddCartV2}
-                    >
-                        Add to cart
-                    </button>
-                </> 
+                <button 
+                    className='btn'
+                    onClick={handleAddCart}
+                >
+                    Add to cart
+                </button>
             )
         }
     }
