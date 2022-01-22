@@ -25,43 +25,6 @@ export const useFirestore = (collection) => {
         }
     }
 
-    const addDocumentInSubcollection = async (userId, productId, doc) => {
-        // reset state pre-fetching
-        setError(null)
-        setIsPending(true)
-
-        try{
-            if(!isCancelled){
-                await projectFirestore.collection('users').doc(userId)
-                      .collection('cart').doc(productId).set({ ...doc });
-            }
-        } catch(err){
-            if(!isCancelled){
-                setError(err.message)
-                setIsPending(false)
-            }
-        }
-    }
-
-    const updateDocumentInSubcollection = async (id, productId, updates) => {
-        // reset state pre-fetching
-        setIsPending(true)
-        setError(null)
-
-        try{
-            if(!isCancelled){
-                await projectFirestore.collection('users').doc(id)
-                    .collection('cart').doc(productId).update(updates)
-            }
-        } catch(err){
-            if(!isCancelled){
-                setError(err.message)
-                setIsPending(false)
-            }
-        }
-
-    }
-
     const updateDocument = async (id, updates) => {
         // reset state pre-fetching
         setIsPending(true)
@@ -79,34 +42,13 @@ export const useFirestore = (collection) => {
         }
     }
 
-    const deleteDocumentInSubcollection = async (id, productId) => {
-        // reset state pre-fetching
-        setIsPending(true)
-        setError(null)
-
-        try{
-            if(!isCancelled){
-                await projectFirestore.collection('users').doc(id)
-                    .collection('cart').doc(productId).delete()
-            }
-        } catch(err){
-            if(!isCancelled){
-                setError(err.message)
-                setIsPending(false)
-            }
-        }
-    }
-
     useEffect(() => {
         return () => setIsCancelled(true);
     }, [])
 
     return { 
         addDocument, 
-        addDocumentInSubcollection, 
         updateDocument, 
-        updateDocumentInSubcollection, 
-        deleteDocumentInSubcollection,
         isPending, 
         error };
 }
