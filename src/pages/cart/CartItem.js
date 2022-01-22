@@ -1,19 +1,19 @@
 import React from 'react'
 // HOOKS
 import { useAuthContext } from '../../hooks/useAuthContext' 
-import { useFirestore } from '../../hooks/useFirestore'
+import { useFirestoreSubcollection } from '../../hooks/useFirestoreSubcollection'
 // COMPONENTS
 import CartQuantity from './CartQuantity'
 
 const CartItem = ({ item }) => {
     // STATE
     const { dispatch, user } = useAuthContext()
-    const { deleteDocumentInSubcollection } = useFirestore('cart')
+    const { deleteDocumentInSubcollection } = useFirestoreSubcollection('users')
 
     // EVENTS
     const handleRemove = async () => {
         dispatch({ type : 'REMOVE_ITEM', payload : item})
-        await deleteDocumentInSubcollection(user.uid, item.id)
+        await deleteDocumentInSubcollection(user.uid, 'cart', item.id)
     }
 
     // FUNCTIONS
