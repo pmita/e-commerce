@@ -1,18 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'; // ROUTER
+import { Link, useNavigate } from 'react-router-dom'; // ROUTER
 import { useAuthContext } from '../../hooks/useAuthContext'; // CONTEXT
-import { useFirestore } from '../../hooks/useFirestore';
+import { useFirestoreSubcollection } from '../../hooks/useFirestoreSubcollection';
 
 const ProductCard = ({ product }) => {
     // STATE
     const { dispatch, user, cart } = useAuthContext()
-    const { addDocumentInSubcollection } = useFirestore('cart')
+    const { addDocumentInSubcollection } = useFirestoreSubcollection('users')
+    const navigate = useNavigate()
 
 
     // EVENTS
     const handleAddCart = async () => {
         await addDocumentInSubcollection(
             user.uid, 
+            'cart',
             product.id, 
             { ...product, quantity : 1 }
         );
@@ -20,6 +22,15 @@ const ProductCard = ({ product }) => {
     }
 
     // FUNCTIONS
+    const redirectIfNotSignedIn = () => (
+         <button 
+            className='btn'
+            onClick={() => navigate('/signin')}
+            >
+                Add to cart
+        </button>
+    )
+
     const disableAddCart = () => {
         if(cart.find(item => item.id === product.id)) {
             return(
@@ -50,7 +61,7 @@ const ProductCard = ({ product }) => {
             <h6 className='product-price'>{product.price}</h6>
             <div className='product-cardDetails'>
                 <h4>{product.title}</h4>
-                {disableAddCart()}
+                {user ? disableAddCart() : redirectIfNotSignedIn()}
             </div>
         </div>
     );

@@ -36,7 +36,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<Cart />} />
+          </Route>
           <Route path='/contact-us' element={<Contact />} />
           <Route path='/about' element={<About />} />
           <Route path='/products' element={<Products />} />
