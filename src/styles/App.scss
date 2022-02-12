@@ -10,25 +10,28 @@
 @import './components/Navbar';
 @import './components/Banner';
 
-// Pages
+// basic pages
+@import './pages/Home';
 @import './pages/About';
-
+@import './pages/Contact';
+// cart pages
 @import './pages/Cart';
 @import './pages/CartItem';
 @import './pages/CartTotal';
-
-@import './pages/Contact';
-
-@import './pages/Home';
-
+// checkout pages
+@import './pages/CheckoutPartOne.scss';
+@import './pages/CheckoutPartTwo.scss';
+@import './pages/CheckoutPartThree.scss';
+@import './pages/CheckoutPartFour.scss';
+@import './pages/CheckoutSuccess.scss';
+// product pages
+@import './pages/Product';
 @import './pages/Products';
 @import './pages/ProductCard';
-
-@import './pages/Product';
-
+// profile pages
 @import './pages/Profile';
-
+//testimonials pages
 @import './pages/Testimonials';
-
+// authentication pages
 @import './pages/Signup';
 @import './pages/Signin';

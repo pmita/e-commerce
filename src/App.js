@@ -11,6 +11,11 @@ import Product from './pages/product/Product';
 import Profile from './pages/profile/Profile';
 import Testimonials from './pages/testimonials/Testimonials';
 import Signup from './pages/signup/Signup';
+import CheckoutPartOne from './pages/checkout/CheckoutPartOne';
+import CheckoutPartTwo from './pages/checkout/CheckoutPartTwo';
+import CheckoutPartThree from './pages/checkout/CheckoutPartThree';
+import CheckoutPartFour from './pages/checkout/CheckoutPartFour';
+import CheckoutSuccess from './pages/checkout/CheckoutSuccess';
 // COMPONENTS
 import Navbar from './components/Navbar';
 import Signin from './pages/sigin/Signin';
@@ -38,6 +43,21 @@ function App() {
           <Route path='/' exact element={<Home />} />
           <Route path='/cart' element={<PrivateRouteToLogin />}>
             <Route path='/cart' element={<Cart />} />
+          </Route>
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<CheckoutPartOne />} />
+          </Route>
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<CheckoutPartTwo />} />
+          </Route>
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<CheckoutPartThree />} />
+          </Route>
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<CheckoutPartFour />} />
+          </Route>
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<CheckoutSuccess />} />
           </Route>
           <Route path='/contact-us' element={<Contact />} />
           <Route path='/about' element={<About />} />
