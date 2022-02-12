@@ -1,0 +1,17 @@
+.products-container{
+    min-height: 90vh;
+    width: 100%;
+    @include flex(column, flex-start, center);
+    h2, h4{
+       padding: 2.5rem 0; 
+    }
+}
+
+.products{
+    width: 100%;
+    padding: 0 10rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    grid-auto-rows: minmax(230px, 350px);
+    gap: 2rem;
+}

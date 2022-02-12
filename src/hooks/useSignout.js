@@ -17,7 +17,7 @@ export const useSignout = () => {
             // we need to change user status from online to offline before we sign the user out
             // reason why being we won't have access to the user object after we signout
             const { uid } = user
-            await projectFirestore.collection('users').doc(uid).update({
+            await projectFirestore.collection('users').doc(uid).update({ //always ensure that this item exists
                 online : false
             })
 

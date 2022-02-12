@@ -3,10 +3,11 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-router-dom'
 // PAGES
 import Home from './pages/home/Home';
-import Cart from './pages/cart/Cart';
+import Cart from './pages/cart/CartV2';
 import Contact from './pages/contact/Contact';
 import About from './pages/about/About';
 import Products from './pages/products/Products';
+import Product from './pages/product/Product';
 import Profile from './pages/profile/Profile';
 import Testimonials from './pages/testimonials/Testimonials';
 import Signup from './pages/signup/Signup';
@@ -35,10 +36,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<PrivateRouteToLogin />}>
+            <Route path='/cart' element={<Cart />} />
+          </Route>
           <Route path='/contact-us' element={<Contact />} />
           <Route path='/about' element={<About />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/products/:id' exact element={<Product />} />
           <Route path='/profile' element={<PrivateRouteToLogin />}>
             <Route path='/profile' element={<Profile />} />
           </Route>

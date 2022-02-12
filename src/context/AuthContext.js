@@ -6,10 +6,13 @@ export const AuthContext = createContext();
 // REDUCER STATE & FUNCTION
 const initialState = {
     user : null,
-    authIsReady : false
+    authIsReady : false,
+    cart : [],
+    total : 0
 }
 
 const authReducer = (state, action) => {
+    const { cart } = state
     switch(action.type){
         case 'SIGNIN':
             return { ...state, user : action.payload };
@@ -18,7 +21,29 @@ const authReducer = (state, action) => {
         case 'SIGNOUT':
             return { ...state, user : null };
         case 'AUTH_IS_READY':
-            return { user : action.payload, authIsReady : true }
+            return { ...state, user : action.payload, authIsReady : true }
+        case 'CALCULATE_TOTAL':
+            const newTotal = cart.reduce((acc, curr) => {
+                return acc + (curr.price * curr.quantity);
+            }, 0)
+            return { ...state, total : newTotal };
+        case 'ADD_ITEM':
+            if(!cart.find((item) => item.id === action.payload.id)){
+                cart.push({
+                    ...action.payload,
+                    quantity : 1
+                })
+            }
+            return { ...state, cart : [...cart] };
+        case 'REMOVE_ITEM':
+            const newCart = cart.filter((item) => item.id !== action.payload.id)
+            return { ...state, cart : [ ...newCart ]};
+        case 'INCREASE_ITEM_QUANTITY':
+            cart[cart.findIndex((item) => item.id === action.payload.id)].quantity++
+            return { ...state, cart : [...cart] };
+        case 'DECREASE_ITEM_QUANTITY':
+            cart[cart.findIndex((item) => item.id === action.payload.id)].quantity--
+            return { ...state, cart : [...cart] };
         default:
             return state;
     }

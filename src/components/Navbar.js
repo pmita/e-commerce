@@ -11,7 +11,7 @@ import { useSignout } from '../hooks/useSignout' // HOOKS
 const Navbar = () => {
     // STATE
     const [isActive, setIsActive] = useState(false)
-    const { user } = useAuthContext()
+    const { user, cart } = useAuthContext()
     const { signout, isPending } = useSignout()
     const navigate = useNavigate()
 
@@ -81,7 +81,7 @@ const Navbar = () => {
 
                 {!user && (
                     <li>
-                        <button className='btn' onClick={() => navigate('/')}>
+                        <button className='btn' onClick={() => navigate('/signin')}>
                             Sign in  
                         </button>
                     </li>
@@ -92,7 +92,7 @@ const Navbar = () => {
                             src={cartIcon} 
                             alt='user cart icon' 
                         />
-                        <span>1</span>
+                        <span>{cart.length}</span>
                     </Link>
                 </li>
             </ul>

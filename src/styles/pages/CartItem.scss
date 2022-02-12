@@ -1,0 +1,35 @@
+.cart-item{
+    width: 100%;
+    @include flex(row, space-between, center);
+    border-bottom: 2px solid rgb(221, 219, 219);
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    h6{
+        text-decoration: underline;
+        color: $green;
+        padding: 0.25rem;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+.quantity-controls{
+    span{
+        margin: 0 1rem;
+    }
+}
+
+@media only screen and (max-width: 900px){
+    .cart-item{
+        @include flex(column, space-between, center);
+    }
+
+    .cart-item-price,
+    .cart-item-details,
+    .cart-item-quantity,
+    .cart-item-total{
+        width: 100%;
+        @include flex(row, space-evenly, center);
+    }
+}

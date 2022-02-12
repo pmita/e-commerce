@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSignin } from '../../hooks/useSignin' //HOOKS
-import { useNavigate } from 'react-router' // ROUTER
+import { useNavigate, Link } from 'react-router-dom' // ROUTER
 
 const Signin = () => {
     // STATE
@@ -41,6 +41,9 @@ const Signin = () => {
                 {isPending && <button className='btn' disabled>Loading...</button>}
                 {error && <p className='error'>{error}</p>}
             </form>
+            <Link to='/signup' className='clasicLink'>
+                Not a user? Signup here
+            </Link>
         </div>
     );
 }

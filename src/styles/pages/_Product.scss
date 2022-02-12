@@ -1,0 +1,39 @@
+.product-page{
+    min-height: 50vh;
+    width: 100%;
+    padding: 0 10rem;
+    @include flex(row, space-between, flex-start);
+    flex-wrap: wrap;
+}
+
+.product-page-right,
+.product-page-left{
+    padding-top: 5rem;
+    flex: 1 1 40rem;
+    height: 50vh;
+}
+
+.product-page-left{
+    img{
+        height: 90%;
+        width: 100%;
+        object-fit: cover;
+    }
+    p{
+        text-align: center;
+    }
+}
+
+.product-page-right{
+    @include flex(column, space-evenly, flex-start);
+    .product-details{
+        border: 1px solid $black;
+        padding: 0 1rem;
+        li{
+            padding: 1rem 0;
+            span{
+                font-weight: 700;
+            }
+        }
+    }
+}

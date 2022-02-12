@@ -35,10 +35,15 @@ export const useSignup = () => {
             
             await projectFirestore.collection('users').doc(response.user.uid).set({
                 online: true,
-                displayName : displayName
+                displayName : displayName,
+                cart : []
             })
             
-            dispatch({ type : 'SIGNUP', poayload : response.user })
+            dispatch({ type : 'SIGNUP', payload : response.user })
+
+            await projectFirestore.collection('cart').doc(response.user.displayName).set({
+                cart : {}
+            })
 
             if(!isCancelled){
                 setIsPending(false)

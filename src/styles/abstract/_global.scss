@@ -59,10 +59,19 @@
     font-size: 1em;
     border: 1px solid $green;
     transition: $transition;
+    &:hover{
+      color: $green;
+      background-color: $white;
+    }
+    &:disabled{
+      cursor: not-allowed;
+    }
   }
-  .btn:hover {
+
+  .clasicLink{
+    text-align: center;
+    text-decoration: underline;
     color: $green;
-    background-color: $white;
   }
 
   /* forms */
