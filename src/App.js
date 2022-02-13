@@ -11,8 +11,8 @@ import Product from './pages/product/Product';
 import Profile from './pages/profile/Profile';
 import Testimonials from './pages/testimonials/Testimonials';
 import Signup from './pages/signup/Signup';
-import CheckoutPartOne from './pages/checkout/CheckoutPartOne';
-import CheckoutPartTwo from './pages/checkout/CheckoutPartTwo';
+import CheckoutDetails from './pages/checkout/CheckoutDetails';
+import CheckoutShipping from './pages/checkout/CheckoutPartTwo';
 import CheckoutPartThree from './pages/checkout/CheckoutPartThree';
 import CheckoutPartFour from './pages/checkout/CheckoutPartFour';
 import CheckoutSuccess from './pages/checkout/CheckoutSuccess';
@@ -41,23 +41,17 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/cart' element={<PrivateRouteToLogin />}>
-            <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' exact element={<Cart />} />
+          <Route path='/checkout-details' exact element={<CheckoutDetails />} />
+          <Route path='/checkout-shipping' exact element={<CheckoutShipping />} />
+          <Route path='/checkout-part-three' element={<PrivateRouteToLogin />}>
+            <Route path='/checkout-part-three' element={<CheckoutPartThree />} />
           </Route>
-          <Route path='/cart' element={<PrivateRouteToLogin />}>
-            <Route path='/cart' element={<CheckoutPartOne />} />
+          <Route path='/checkout-part-four' element={<PrivateRouteToLogin />}>
+            <Route path='/checkout-part-four' element={<CheckoutPartFour />} />
           </Route>
-          <Route path='/cart' element={<PrivateRouteToLogin />}>
-            <Route path='/cart' element={<CheckoutPartTwo />} />
-          </Route>
-          <Route path='/cart' element={<PrivateRouteToLogin />}>
-            <Route path='/cart' element={<CheckoutPartThree />} />
-          </Route>
-          <Route path='/cart' element={<PrivateRouteToLogin />}>
-            <Route path='/cart' element={<CheckoutPartFour />} />
-          </Route>
-          <Route path='/cart' element={<PrivateRouteToLogin />}>
-            <Route path='/cart' element={<CheckoutSuccess />} />
+          <Route path='/checkout-sucess' element={<PrivateRouteToLogin />}>
+            <Route path='/checkout-sucess' element={<CheckoutSuccess />} />
           </Route>
           <Route path='/contact-us' element={<Contact />} />
           <Route path='/about' element={<About />} />

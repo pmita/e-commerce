@@ -1,0 +1,9 @@
+.checkout-price{
+    min-height: 200px;
+    @include flex(column, center, stretch);
+}
+
+.subtotal-details{
+    @include flex(row, space-between, center);
+    padding: 1rem 0;
+}

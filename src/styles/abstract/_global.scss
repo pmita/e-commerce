@@ -77,7 +77,7 @@
   /* forms */
 label {
   display: block;
-  margin: 24px auto;
+  margin: 24px 0;
 }
 label span {
   display: block;
@@ -91,6 +91,9 @@ input, textarea {
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 4px;
+  &:focus{
+    outline: 1px solid $green;
+  }
 }
 textarea {
   min-height: 160px;

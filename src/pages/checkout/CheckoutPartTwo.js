@@ -1,11 +1,11 @@
 import React from 'react'
 
-const CheckoutPartTwo = () => {
+const CheckoutShipping = () => {
     return(
         <div>
-            Welcome to CheckoutPartTwo page
+            Welcome to CheckoutShipping page
         </div>
     );
 }
 
-export default CheckoutPartTwo;
+export default CheckoutShipping;

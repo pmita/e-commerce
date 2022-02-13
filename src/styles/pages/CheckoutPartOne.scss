@@ -1,0 +1,51 @@
+.cart-details{
+    min-height: 90vh;
+    width: 100%;
+    @include flex(row, flex-start, flex-start);
+}
+
+.cart-details-left{
+    padding: 5rem;
+    flex: 1;
+    @include flex(column, space-evenly, flex-start);
+    form{
+        margin-top: 5rem;
+        min-height: 350px;
+        width: 100%;
+        @include flex(column, flex-start, stretch);
+        label{
+            font-size: $h3;
+        }
+        input{
+            padding: 1rem;
+            margin: 1rem 0;
+            &:focus{
+                outline: 1px solid $green;
+            }
+        }
+        .address-block,
+        .postcode-block,
+        .details-actions{
+            @include flex(row, space-between, center);
+            gap: 1rem;
+        }
+    }
+}
+
+.details-actions{
+    margin-top: 5rem;
+}
+
+.checkout-pages{
+    @include flex(row, space-evenly, center);
+    li{
+        padding-right: 2rem;
+        color: grey;
+        .success{
+            color: $green;
+        }
+        .current{
+            color: black;
+        }
+    }
+}

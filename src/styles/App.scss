@@ -19,11 +19,15 @@
 @import './pages/CartItem';
 @import './pages/CartTotal';
 // checkout pages
+@import './pages/CheckoutItems.scss';
 @import './pages/CheckoutPartOne.scss';
 @import './pages/CheckoutPartTwo.scss';
 @import './pages/CheckoutPartThree.scss';
 @import './pages/CheckoutPartFour.scss';
 @import './pages/CheckoutSuccess.scss';
+@import './pages/CheckoutSingleItem.scss';
+@import './pages/CheckoutPriceDetails.scss';
+@import './pages/CheckoutApplyCoupon.scss';
 // product pages
 @import './pages/Product';
 @import './pages/Products';

@@ -1,0 +1,9 @@
+.coupon-form{
+    margin-top: 5rem;
+    @include flex(row, space-between, center);
+    gap: 1rem;
+    input,
+    button{
+        flex: 1;
+    }
+}

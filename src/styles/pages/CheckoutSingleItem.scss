@@ -1,0 +1,26 @@
+.checkout-single-item{
+    @include flex(row, space-between, flex-start);
+}
+
+.item-image{
+    flex: 1;
+    @include flex(row, center, center); 
+    background: white;
+    position: relative;
+    span{
+        position: absolute;
+        top: 5%;
+        right: 10%;
+        color: $green;
+    }
+}
+
+.item-details{
+    flex: 1;
+    height: 100%;
+    @include flex(column, center, flex-start);
+    padding-left: 5rem;
+    h3{
+        color: $green;
+    }
+}

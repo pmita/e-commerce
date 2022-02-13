@@ -28,6 +28,7 @@ export const useSubCollection = (collection, docId , subCollection) => {
                     setIsPending(false)
                 }
             }, (err) => {
+                setIsPending(false)
                 setError(err.message)
                 console.log('Could not fetch data from subcollection on this occasion')
             })
