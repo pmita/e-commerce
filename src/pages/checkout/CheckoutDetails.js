@@ -2,17 +2,79 @@ import React, { useState } from 'react'
 //COMPONENTS
 import CheckoutItems from './CheckoutItems';
 import { Link, useNavigate } from 'react-router-dom' //ROUTER
+import InputField from '../../components/InputField';
 
 const CheckoutDetails = () => {
     //STATE & VARIABLES
-    const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [postCode, setPostCode] = useState('')
-    const [country, setCountry] = useState('')
+    const [addressValues, setAddressValues] = useState({
+        email: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        country: '',
+        postCode: '',
+    })
     const navigate = useNavigate()
+
+    const addressInputs = [
+        {
+            id: 1,
+            name: 'email',
+            type: 'email',
+            placeholder: 'Email',
+            required: true,
+            errorMessage: 'Please enter a valid email address'
+        },
+        {
+            id: 2,
+            name: 'firstName',
+            type: 'text',
+            placeholder: 'First Name',
+            required: true,
+            errorMessage: 'Please enter less than 15 characters',
+            pattern: `[a-z]{1,15}`
+        },
+        {
+            id: 3,
+            name: 'lastName',
+            type: 'text',
+            placeholder: 'Last Name',
+            required: true,
+            errorMessage: 'Please enter less than 15 characters',
+            pattern: `[a-z]{1,15}`
+        },
+        {
+            id: 4,
+            name: 'address',
+            type: 'text',
+            placeholder: 'Line of Address',
+            required: true
+        },
+        {
+            id: 5,
+            name: 'city',
+            type: 'text',
+            placeholder: 'City',
+            required: true,
+        },
+        {
+            id: 6,
+            name: 'coutry',
+            type: 'text',
+            placeholder: 'Country',
+            required: true
+        },
+        {
+            id: 7,
+            name: 'postCode',
+            type: 'text',
+            placeholder: 'Post Code',
+            required: true,
+            errorMessage: 'Please enter a valid UK post code',
+            pattern: `^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))[0-9][A-Za-z]{2})$`
+        },
+    ]
 
     //EVENTS
     const handleSubmit = (e) => {
@@ -20,7 +82,10 @@ const CheckoutDetails = () => {
         navigate('/checkout-shipping')
     }
 
-    console.log('hurray');
+    const onChange = (e) => {
+        setAddressValues({ ...addressValues, [e.target.name] : e.target.value })
+    }
+
 
     return(
         <div className='cart-details'>
@@ -42,64 +107,15 @@ const CheckoutDetails = () => {
                 </ul>
 
                 <form onSubmit={handleSubmit}>
-                    <label>Shipping Address</label>
-                    <input
-                        type='email'
-                        required
-                        placeholder='Enter your email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <label>Shipping Address</label>
-                    <div className='address-block'>
-                        <input
-                            type='text'
-                            required
-                            placeholder='Name'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                    <label>Your Details</label>
+                    {addressInputs.map((input) => (
+                        <InputField
+                            key={input.id}
+                            {...input}
+                            value={addressValues[input.name]}
+                            onChange={onChange}
                         />
-                        <input
-                            type='text'
-                            required
-                            placeholder='Last Name'
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                    </div>
-
-                    <input
-                        type='text'
-                        required
-                        placeholder='Address and Number'
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                    />
-
-                    <div className='postcode-block'>
-                        <input
-                            type='text'
-                            placeholder='City'
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                        />
-                        <input
-                            type='text'
-                            required
-                            placeholder='Post Code'
-                            value={postCode}
-                            onChange={(e) => setPostCode(e.target.value)}
-                        />
-                    </div>
-
-                    <input
-                        type='text'
-                        required
-                        placeholder='Select Country'
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                    />
+                    ))}
 
                     <div className='details-actions'>
                         <Link to='/cart' className='clasicLink'>
